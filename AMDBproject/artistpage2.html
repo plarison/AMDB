@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Arkansas Music Database</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="assets/style/amdbsite.css">
+  
+</head>
+<body>
+<div class="screen">
+	<div class="row header">
+		<h3 id="welcome">Welcome to the</h3>
+		<h1 id="amdb">Arkansas Music Database</h1>
+		<hr>
+	</div>
+  
+	<div class="row namebar">
+		<h2 id="lblArtistName" style="margin: 0px;"></h2>
+	</div>
+
+	<div class="buttonbar">
+        <div class="btn-group">
+            <button type="button">Information</button>
+			<button id="centerbutton" type="button">Albums</button>
+			<button type="button">Media</button>
+        </div>
+	</div>
+	
+	<div id="displayPane" class="row content">
+				
+	</div>
+
+	<div class="row footer">
+		Photo Coutesy of Little Rock Convention and Visitors Bureau
+	</div>
+</div>
+
+<script>
+
+const apiKey = 523532;
+
+const apiArtistSearch = "https://www.theaudiodb.com/api/v1/json/" + apiKey + "/search.php?s=";
+const apiAllAlbum = "https://www.theaudiodb.com/api/v1/json/"  + apiKey + "/searchalbum.php?s=";
+const apiMvids = "https://www.theaudiodb.com/api/v1/json/"  + apiKey + "/mvid.php?i=";
+//const apiOneAlbum = "https://www.theaudiodb.com/api/v1/json/"  + apiKey + "/album.php?m=";
+const apiTrackList = "https://www.theaudiodb.com/api/v1/json/"  + apiKey + "/track.php?m=";
+//const apiTrackInfo = "https://www.theaudiodb.com/api/v1/json/"  + apiKey + "/track.php?h=";
+
+let searchTerm = "evanescence";
+let output = "";
+
+let callArtist = apiArtistSearch + searchTerm;
+let callAllAlbums = apiAllAlbum + searchTerm;
+let callMvids = apiMvids + 111372;  ///////////////////////FIX THIS
+let callTrackList = ""; //apiTrackList + 2135238;
+//let callTrackInfo = apiTrackInfo + 33033015;
+
+// https://www.theaudiodb.com/api/v1/json/523532/search.php?s=johnny_cash
+
+let artistArray = [];
+let artistImages = [];
+let artistAlbums = [];
+let musicVideos = [];
+let trackList = [];
+
+
+//While debugging: Pick one
+//getArtist(callArtist);
+//getAllAlbums(callAllAlbums);
+//getMvids(callMvids);
+//getTrackList(callTrackList);
+getArtistInfo(callArtist);
+
+
+
+async function getArtistInfo(file) {
+  let thisArtist = await fetch(file);
+  let rawJSON = await thisArtist.text();
+  let initObj = JSON.parse(rawJSON);
+  let objArtist = JSON.parse(JSON.stringify(initObj.artists[0]));
+      
+  artistArray[0] = JSON.stringify(objArtist.idArtist);
+  artistArray[1] = JSON.stringify(objArtist.strArtist);
+  artistArray[2] = JSON.stringify(objArtist.strCountry);
+  artistArray[3] = JSON.stringify(objArtist.strStyle);
+  artistArray[4] = JSON.stringify(objArtist.strGenre);
+  artistArray[5] = JSON.stringify(objArtist.strMood);
+  artistArray[6] = JSON.stringify(objArtist.intFormedYear);
+  artistArray[7] = JSON.stringify(objArtist.intBornYear);
+  artistArray[8] = JSON.stringify(objArtist.intDiedYear);
+  artistArray[9] = JSON.stringify(objArtist.strDisbanded);
+  artistArray[10] = JSON.stringify(objArtist.strWebsite);
+  artistArray[11] = JSON.stringify(objArtist.strGender);
+  artistArray[12] = JSON.stringify(objArtist.intMembers);
+  artistArray[13] = JSON.stringify(objArtist.strLabel);
+  artistArray[14] = JSON.stringify(objArtist.strBiographyEN);
+  artistArray[15] = [];
+    artistArray[15][0] = JSON.stringify(objArtist.strArtistThumb);
+    artistArray[15][1] = JSON.stringify(objArtist.strArtistLogo);
+    artistArray[15][2] = JSON.stringify(objArtist.strArtistCutout);
+    artistArray[15][3] = JSON.stringify(objArtist.strArtistClearart);
+    artistArray[15][4] = JSON.stringify(objArtist.strArtistWideThumb);
+    artistArray[15][5] = JSON.stringify(objArtist.strArtistFanart);
+    artistArray[15][6] = JSON.stringify(objArtist.strArtistFanart2);
+    artistArray[15][7] = JSON.stringify(objArtist.strArtistFanart3);
+    artistArray[15][8] = JSON.stringify(objArtist.strArtistFanart4);
+    artistArray[15][9] = JSON.stringify(objArtist.strArtistBanner);
+  artistArray[16] = [];
+      await populateAlbums(callAllAlbums);
+  artistArray[17] = [];
+      callMvids = apiMvids + artistArray[0].slice(1,artistArray[0].length-1);
+	  await populateMvids(callMvids);
+  
+  //remove first/last quotes from values
+  for (let i = 0; i < artistArray.length-3; i++) {
+  artistArray[i] = artistArray[i].slice(1,-1);} 
+  
+  if (artistArray[9] = "ul") {
+	artistArray[9] = "Current";
+  }
+   
+  //for (let i = 0; i < artistArray[15].length; i++) {	  
+  //artistArray[15][i] = artistArray[15][i].slice(1,-1);} 
+  //;
+	
+  //for (let i = 0; i < artistArray[16].length; i++) {
+	//  for (let j = 0; j < artistArray[16][i].length; j++) {
+  //artistArray[16][i][j] = artistArray[16][i][j].slice(1,-1);} 
+  //}
+  
+  //for (let j = 0; j < artistArray[17].length; j++) {
+//	for (let k = 0; k < artistArray[17][j].length; k++) {
+//	artistArray[17][j][k] = artistArray[17][j][k].slice(1,-1);} 
+//	}
+  
+  displayArtist();
+  /////OUTPUT FOR DEBUGGING
+  /*
+  output = "";
+  for (let i = 0; i < artistArray.length-3; i++) {
+  output += artistArray[i] + "<br>";} 
+  output += "<br>";
+ 
+  for (let i = 0; i < artistArray[15].length; i++) {	  
+  output += artistArray[15][i] + "<br>";} 
+  output += "<br>";
+	
+  for (let i = 0; i < artistArray[16].length; i++) {
+	  for (let j = 0; j < artistArray[16][i].length; j++) {
+  output += artistArray[16][i][j] + "<br>";} 
+  output += "<br>";}
+  
+  for (let j = 0; j < artistArray[17].length; j++) {
+	for (let k = 0; k < artistArray[17][j].length; k++) {
+	output += artistArray[17][j][k] + "<br>";} 
+	output += "<br>";}
+  
+  document.getElementById("demo").innerHTML = output;
+  /////////////////
+  */
+}
+
+async function populateAlbums(file) {
+  let allAlbums = await fetch(file);
+  let rawJSON = await allAlbums.text();
+  let objDiscography = JSON.parse(rawJSON);
+        
+  for (let i = 0; i < objDiscography.album.length; i++) {
+    artistArray[16][i] = [];
+    artistArray[16][i][0] = objDiscography.album[i].idAlbum;
+    artistArray[16][i][1] = objDiscography.album[i].strAlbum;
+    artistArray[16][i][2] = objDiscography.album[i].intYearReleased;
+	artistArray[16][i][3] = objDiscography.album[i].strReleaseFormat;
+    artistArray[16][i][4] = objDiscography.album[i].strLabel;
+   	artistArray[16][i][5] = objDiscography.album[i].strAlbumThumb;  
+    
+  } 
+  
+}
+
+async function  populateMvids(file) {
+  let mVids = await fetch(file);
+  let rawJSON = await mVids.text();
+  let initObj = JSON.parse(rawJSON);
+  let objVids = JSON.parse(JSON.stringify(initObj.mvids));
+  
+  
+  for (let i = 0; i < objVids.length; i++) {
+    artistArray[17][i] = [];
+    artistArray[17][i][0] = objVids[i].idAlbum;
+    artistArray[17][i][1] = objVids[i].strAlbum;
+    artistArray[17][i][2] = objVids[i].idTrack;
+	artistArray[17][i][3] = objVids[i].strTrack;
+    artistArray[17][i][4] = objVids[i].strMusicVid;
+  }
+}
+
+function displayArtist(){
+	//Display artist name at top
+	document.getElementById("lblArtistName").innerHTML = artistArray[1];
+	
+	//replace or remove escape characters
+	artistArray[14] = artistArray[14].replace(/\\n\\n/g, "<br><br>");
+	artistArray[14] = artistArray[14].replace(/\\/g, "");
+	
+	//create contents of display pane
+	let artistInfo = "<img id=\"displayPaneImage\" src=" + artistArray[15][4] + "alt=\"Band Image\"> <br>" + 
+		"<p><b>Origin: </b>" + artistArray[2] + "<br><b>Genre: </b>" + 
+		artistArray[4] + "<br><b>Style: </b>" + artistArray[3] + "<br><b>Mood: </b>" + 
+		artistArray[5] + "<br><b>Active: </b>" + artistArray[6] + "-" + artistArray[9] 		
+		if (artistArray[12]==1) { 
+			artistInfo += "<br><b>Born: </b>" + artistArray[7];
+
+			if (artistArray[8]=="ul") {
+				const d = new Date();
+				let age = d.getFullYear()-artistArray[7];
+				artistInfo += "<br><b>Age: </b>" + age;
+				} else {
+				artistInfo += "<br><b>Died: </b>" + artistArray[8];
+				}
+				
+			} else {
+			artistInfo += "<br><b>Members: </b>" + artistArray[12];
+			}
+		
+		artistInfo += "<br><b>Official Site: </b>" + artistArray[10] + "<br><b>Biography:</b><br>" + artistArray[14] + "</p>";  
+	
+	document.getElementById("displayPane").innerHTML = artistInfo;
+}
+
+
+  
+   
+   
+  
+
+</script>
+</body>
+</html>

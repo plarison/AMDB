@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Arkansas Music Database</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="assets/style/amdbsite.css">
+  
+</head>
+<body>
+<div class="screen">
+	<div class="row header">
+		<h3 id="welcome">Welcome to the</h3>
+		<h1 id="amdb">Arkansas Music Database</h1>
+		<hr>
+	</div>
+  
+	<div class="row namebar">
+		<h2 id="lblArtistName" style="margin: 0px;">Artist</h2>
+	</div>
+
+	<div class="buttonbar">
+        <div class="btn-group">
+            <button type="button">Information</button>
+			<button id="centerbutton" type="button">Albums</button>
+			<button type="button">Media</button>
+        </div>
+	</div>
+	
+	<div class="row albumpicker">
+		 <table class="albumpicker">
+		 <colgroup>
+			<col id="sidecol" span="1">
+			<col id="centercol" span="1">
+			<col id="sidecol" span="1">
+		</colgroup>
+	<tbody>
+			<tr>
+				<td><img id="switchAlbumCover" src="assets/images/placeholderLeft.jpg"alt="strAlbum">
+				<img id="switchAlbumArrow" style="float: left" src="assets/images/dchevleft.png"alt="strAlbum"></td>
+				<td><img id="activeAlbum" src="assets/images/placeholderCenter.jpg"alt="strAlbum"></td>
+				<td><img id="switchAlbumCover" src="assets/images/placeholderRight.jpg"alt="strAlbum">
+				<img id="switchAlbumArrow" src="assets/images/dchevright.png"alt="strAlbum"></td>
+			</tr>
+			</tbody>
+		</table> 
+		
+	</div>
+	
+	<div class="row namebar">
+		<h2 id="lblAlbumName" style="margin: 0px;">Album</h2>
+	</div>
+	
+	<div class="buttonbar">
+        <div class="btn-group">
+            <button type="button">Tracks</button>
+			<button id="centerbutton" type="button">Info</button>
+			<button type="button">Art</button>
+        </div>
+	</div>
+	
+	
+	<div id="displayPane" class="row content">
+				
+	</div>
+
+	
+	<div class="row footer">
+		Photo Coutesy of Little Rock Convention and Visitors Bureau
+	</div>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>
