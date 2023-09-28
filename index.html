@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LFGCZ99PNR"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-LFGCZ99PNR');
+	</script>
+	
+  <title>Arkansas Music Database</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/style/amdbsite.css"> 
+
+</head>
+<body onload="indexLoad()">
+
+<div class="screen" style="background-color: rgba(0,0,0, 0.5);">
+	<a href="index.html" id="homelink">
+	<div class="row header">
+		<h3 id="welcome">Welcome to the</h3>
+		<h1 id="amdb">Arkansas Music Database</h1>
+		<hr style="margin: 2px 0 2px 0;">
+	</div>
+	</a>
+
+  
+  <div class="row searchbar" style="position: relative;">
+    <h2 style="margin: 0; margin-top: 10px; margin-bottom: 5px;">Search for an Artist</h2>
+	
+      <div class="input-container" style="position: relative;">
+		<input id="searchbox" class="input-field" type="text" placeholder="Artist Name" name="search">
+		<input id="submitsearch" class="input-button" type="image" src="assets/images/searchicon.png" alt="Submit" onclick="checkMaster();">
+      </div>	 
+  
+	  <div class="row error">	
+		<p class="searchresponse" id="nonexist" style="visibility: hidden;"><br><br></p>
+	  </div>
+  </div>
+  
+  <div class="row frontpage" style="background: none;"><br>
+	<button class="index" onclick="window.location.href='browse.html';">Browse Artists</button>
+  </div>
+  
+  <div class="row frontpage"style="background: none;">
+    <h2 class="indextext">Not sure who to listen to?<br>Check out a</h2>
+	<button class="index" onclick="randomArtist()">Random Artist</button>
+  </div>
+  
+  <div class="row frontpage" style="background: none;">
+    <h2 class="indextext">Are we missing someone?<br>Tell us about them!</h2>
+	<button class="index" onclick="window.location.href='submitnew.html';">Submit New Artist</button>
+  </div>
+	 
+  <div class="row about" style="background: none;">
+    <br><p  class="indextext">Artist Data is provided by TheAudioDB.com<br>
+	<a href="https://www.theaudiodb.com/" target="_blank">Contribute to TheAudioDB</a> </p>
+    <button class="index" style="margin: 2%; padding: 1%; width: auto; font-size: 1em;" onclick="window.location.href='about.html';">About AMDB</button>
+  </div>
+  
+  <div class="row footer">
+		Photo Coutesy of Little Rock Convention and Visitors Bureau
+	</div>
+  
+  
+</div>
+
+<script type="text/javascript" src="assets/scripts/amdbscripts.js"></script> 
+</body>
+</html>

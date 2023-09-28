@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LFGCZ99PNR"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-LFGCZ99PNR');
+	</script>
+	
+  <title>AMDB Artist Info</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/style/amdbsite.css">
+</head>
+<body onload="onLoad()">
+<div id="overL" class="overlay">
+	<div class="innerover">
+	<img id="loadicon" src="assets/images/loading.svg" alt="loading">
+	</div>
+</div>
+<div class="screen">
+	<a href="index.html" id="homelink">
+	<div class="row header">
+		<h3 id="welcome">Welcome to the</h3>
+		<h1 id="amdb">Arkansas Music Database</h1>
+		<hr style="margin: 2px 0 2px 0;">
+	</div>
+	</a>
+  
+	<div class="row namebar">
+		<h2 id="lblArtistName" style="margin: 0px;"></h2>
+	</div>
+
+	<div class="buttonbar">
+        <div class="btn-group">
+            <button onclick="buttonInfoArtist()" id="btninfoartist" type="button">Info</button>
+			<button onclick="buttonAlbums()" id="btnalbums" type="button">Albums</button>
+			<button onclick="buttonMedia()" id="btnmedia" type="button">Media</button>
+        </div>
+	</div>
+	
+	<div class="row namebar">
+		<h2 id="lblAlbumNameTop" style="display: none; margin: 0px; font-size: 1.4em"></h2>
+	</div>
+	
+	<div id="albumpicker" class="row albumpicker" style="display: none;">
+		 <table class="albumpicker">
+		 <colgroup>
+			<col id="sidecol" span="1">
+			<col id="centercol" span="1">
+			<col id="sidecol" span="1">
+		</colgroup>
+	<tbody>
+			<tr>
+				<td>
+				<img onclick="buttonInfoAlbum(-1)" id="prevAlbumCover" src="" alt="previous album">
+				<img onclick="buttonInfoAlbum(-1)" id="prevAlbumArrow" src="assets/images/dchevleft.png" alt="previous album">
+				
+				<img onclick="trackByIndex(-1)" id="prevTrack" src="assets/images/prevtrack.png" alt="previous track" style="display: none;">
+				<img onclick="trackByIndex(-1)" id="prevTrackArrow" src="assets/images/dchevleft.png" alt="strAlbum" style="display: none;">
+				</td>
+				<td>
+				<img onclick="buttonInfoAlbum()" id="activeAlbum" src="" alt="strAlbum">
+				</td>
+				<td>
+				<img onclick="buttonInfoAlbum(1)" id="nextAlbumCover" src="" alt="next album">
+				<img onclick="buttonInfoAlbum(1)" id="nextAlbumArrow" src="assets/images/dchevright.png" alt="next album">
+				
+				<img onclick="trackByIndex(1)" id="nextTrack" src="assets/images/nexttrack.png" alt="next track" style="display: none;">
+				<img onclick="trackByIndex(1)" id="nextTrackArrow" src="assets/images/dchevright.png" alt="next track" style="display: none;">
+				</td>
+			</tr>
+			</tbody>
+		</table> 
+		
+	</div>
+	
+	<div id="albumname" class="row namebar" style="display: none;">
+		<h2 id="lblAlbumName" style="margin: 0px; font-size: 1.2em;">Album</h2>
+	</div>
+
+	<div id="albumbar" class="buttonbar" style="display: none;">
+        <div class="btn-group">
+            <button onclick="buttonTracks()" id="btntracks" type="button">Tracks</button>
+			<button onclick="buttonInfoAlbum()" id="btninfoalbum" type="button">Info</button>
+			<button onclick="buttonArt()" id="btnart" type="button">Art</button>
+        </div>
+	</div>
+	
+	<div id="displayPane" class="row content">
+				
+	</div>
+
+	<div class="row footer">
+		Photo Coutesy of Little Rock Convention and Visitors Bureau
+	</div>
+</div>
+<script type="text/javascript" src="assets/scripts/amdbscripts.js"></script> 
+</body>
+</html>
